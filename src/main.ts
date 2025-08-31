@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 gsap.registerPlugin(ScrollTrigger);
-const section1 = document.querySelector(".section_1") as HTMLDivElement;
 const section2 = document.querySelector(".section_2") as HTMLDivElement;
 
 const lenis = new Lenis({
@@ -63,7 +62,7 @@ rectAreaLight.lookAt(new THREE.Vector3(0, 0, 0));
 scene.add(rectAreaLight);
 
 // === Load Model ===
-gsap.set(camera.position, { x: 0, y: 5.7, z: 3 });
+gsap.set(camera.position, { x: 0, y: 5.2, z: 3 });
 gsap.set(camera.rotation, { x: 0, y: 0, z: 0 });
 const gltfLoader = new GLTFLoader();
 let model: THREE.Group | null = null;
@@ -71,7 +70,7 @@ let mixer: THREE.AnimationMixer | null = null;
 
 gltfLoader.load("untitled.glb", (gltf) => {
   model = gltf.scene;
-  model.scale.set(3, 3, 3);
+  model.scale.set(3.2,3.2,3.2);
   if (gltf.animations && gltf.animations.length > 0) {
     mixer = new THREE.AnimationMixer(model);
     const action = mixer.clipAction(gltf.animations[0]);
@@ -79,27 +78,25 @@ gltfLoader.load("untitled.glb", (gltf) => {
   }
 
   gsap.to(model.rotation, {
-    y: Math.sin(1),
-    ease: "power2.inOut",
+    y:8,
+    ease: "linear",
     scrollTrigger: {
-      trigger: section1,
-      start: "20% bottom",
+      trigger: section2,
+      start: "10% bottom",
       end: "+=100%",
       scrub: true,
-      markers: true,
     },
   });
 
   gsap.to(model.position, {
-    z:-10,
+    z:-20,
     scrollTrigger: {
       trigger: section2,
       start: "top bottom",
-      end: "+=100%",
+      end: "+=200%",
       scrub: true,
-      markers: true,
     },
-    ease: "power2.inOut",
+    ease: "linear",
   });
   scene.add(model);
 });
