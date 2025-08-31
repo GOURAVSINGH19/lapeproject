@@ -3,9 +3,11 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
+
 gsap.registerPlugin(ScrollTrigger);
-const section2 = document.querySelector(".section_2") as HTMLDivElement;
+
+const section2 = document.querySelector(".section_2");
 
 const lenis = new Lenis({
   lerp: 0.1,
@@ -14,7 +16,8 @@ const lenis = new Lenis({
 
 // === Scene Setup ===
 const scene = new THREE.Scene();
-const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+const canvas = document.getElementById("canvas");
+
 // === Camera Setup ===
 const camera = new THREE.PerspectiveCamera(
   45,
@@ -64,13 +67,15 @@ scene.add(rectAreaLight);
 // === Load Model ===
 gsap.set(camera.position, { x: 0, y: 5.2, z: 3 });
 gsap.set(camera.rotation, { x: 0, y: 0, z: 0 });
+
 const gltfLoader = new GLTFLoader();
-let model: THREE.Group | null = null;
-let mixer: THREE.AnimationMixer | null = null;
+let model = null;
+let mixer = null;
 
 gltfLoader.load("untitled.glb", (gltf) => {
   model = gltf.scene;
-  model.scale.set(3.2,3.2,3.2);
+  model.scale.set(3.2, 3.2, 3.2);
+
   if (gltf.animations && gltf.animations.length > 0) {
     mixer = new THREE.AnimationMixer(model);
     const action = mixer.clipAction(gltf.animations[0]);
@@ -78,7 +83,7 @@ gltfLoader.load("untitled.glb", (gltf) => {
   }
 
   gsap.to(model.rotation, {
-    y:8,
+    y: 7,
     ease: "linear",
     scrollTrigger: {
       trigger: section2,
@@ -89,7 +94,7 @@ gltfLoader.load("untitled.glb", (gltf) => {
   });
 
   gsap.to(model.position, {
-    z:-20,
+    z: -20,
     scrollTrigger: {
       trigger: section2,
       start: "top bottom",
@@ -98,6 +103,7 @@ gltfLoader.load("untitled.glb", (gltf) => {
     },
     ease: "linear",
   });
+
   scene.add(model);
 });
 
@@ -123,8 +129,8 @@ function handleResize() {
 window.addEventListener("resize", handleResize);
 window.scrollTo({ top: 0, behavior: "smooth" });
 
-function lenisLoop(time?: number) {
-  lenis.raf(time ?? performance.now());
+function lenisLoop() {
+  lenis.raf(performance.now());
   requestAnimationFrame(lenisLoop);
 }
 
