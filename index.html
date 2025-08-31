@@ -2,12 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>THREE.js x Theatre.js</title>
+    <title>Hape.io</title>
+    <script>
+      document.documentElement.className = "js";
+    </script>
+    <link rel="stylesheet" href="./src/style.css">
+    <script type="module" src="./src/main.js" defer></script>
   </head>
-
-  <body>
+  <body class="loading">
     <div id="app">
       <section class="webgl-container">
         <canvas class="webgl-canvas" id="canvas"></canvas>
@@ -18,12 +21,13 @@
         </div>
       </section>
       <section class="section_2">
-        <span class="text_fade_1"> Fashions fade ,<br>style is External </span>
+        <span class="text_fade_1">
+          Fashions fade ,<br />style is External
+        </span>
         <span class="text_fade_2">
           In Difficult Times ,<br />Fashions is <br />Always Outrageous
         </span>
       </section>
     </div>
-    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

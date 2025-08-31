@@ -105,6 +105,7 @@ gltfLoader.load("untitled.glb", (gltf) => {
   });
 
   scene.add(model);
+  document.body.classList.remove("loading");
 });
 
 // === Animate Loop ===
